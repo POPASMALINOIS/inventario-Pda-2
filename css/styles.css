@@ -1,0 +1,279 @@
+/* css/styles.css
+ *
+ * Puerto directo de la hoja de estilos QSS de la versión de escritorio
+ * (styles.py): misma paleta acromática + colores de estado, misma
+ * tipografía corporativa, mismas esquinas a 0 (sin tarjetas redondeadas,
+ * sin sombras, sin gradientes). El objetivo es que, visualmente, esta
+ * versión web sea indistinguible de la de escritorio.
+ */
+
+:root {
+  --bg: #F2F2F2;
+  --panel: #FFFFFF;
+  --header: #202020;
+  --border: #D5D5D5;
+  --text: #1A1A1A;
+  --text-muted: #5A5A5A;
+  --accent-hover: #3A3A3A;
+  --seleccion: #DCE6F1;
+
+  --op: #73A65A;
+  --inc: #C98A1B;
+  --noop: #8E2E22;
+  --rep: #B23A2E;
+  --noloc: #4A4A4A;
+
+  --ok: #3D7A3D;
+  --warn: #B23A2E;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
+}
+
+.app {
+  padding: 18px 22px 16px 22px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--header);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.estado-conexion {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.estado-conexion.online::before { content: "● "; color: var(--ok); }
+.estado-conexion.offline::before { content: "● "; color: var(--warn); }
+
+/* --- Indicadores --- */
+.stats {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--header);
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+}
+
+.stat b { display: block; font-size: 23px; font-weight: 700; }
+.stat span { font-size: 10px; font-weight: 600; color: var(--text-muted); }
+
+.stat.op { border-left-color: var(--op); }
+.stat.inc { border-left-color: var(--inc); }
+.stat.rep { border-left-color: var(--rep); }
+.stat.noloc { border-left-color: var(--noloc); }
+
+/* --- Barra de herramientas --- */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buscador {
+  flex: 2;
+  min-width: 220px;
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  font-size: 14px;
+  background: var(--panel);
+  font-family: inherit;
+}
+
+.btn {
+  border: none;
+  background: var(--header);
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.btn:hover { background: var(--accent-hover); }
+.btn:disabled { background: #B5B5B5; cursor: default; }
+
+.btn.sec {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn.sec:hover { background: #E8E8E8; }
+
+.btn.activo {
+  background: var(--header);
+  color: #fff;
+  border: 1px solid var(--header);
+}
+
+.spacer { flex: 1; }
+
+/* --- Cuerpo: tabla + panel --- */
+.cuerpo {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.contenedor-tabla {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  flex: 3;
+  min-width: 0;
+  overflow: auto;
+  max-height: 70vh;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background: var(--header);
+  color: #fff;
+  padding: 8px;
+  font-weight: 600;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+thead th:hover { background: var(--accent-hover); }
+
+tbody td { padding: 6px 8px; border-bottom: 1px solid #EAEAEA; }
+tbody tr:nth-child(even) { background: #FAFAFA; }
+tbody tr:hover { background: #F0F4F8; cursor: pointer; }
+tbody tr.seleccionada { background: var(--seleccion); }
+
+.estado-celda { font-weight: 700; }
+.estado-celda.op { color: var(--op); }
+.estado-celda.inc { color: var(--inc); }
+.estado-celda.noop { color: var(--noop); }
+.estado-celda.rep { color: var(--rep); }
+.estado-celda.noloc { color: var(--noloc); }
+
+/* --- Panel de edición --- */
+.panel-edicion {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  flex: 1;
+  min-width: 300px;
+  max-width: 360px;
+  padding: 18px;
+  position: sticky;
+  top: 0;
+}
+
+.panel-edicion h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--header);
+}
+
+.panel-edicion .meta {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-bottom: 10px;
+  min-height: 14px;
+}
+
+.panel-edicion label {
+  display: block;
+  font-weight: 600;
+  margin: 10px 0 4px 0;
+  font-size: 12px;
+}
+
+.panel-edicion select,
+.panel-edicion input[type="text"],
+.panel-edicion textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  padding: 6px 7px;
+  font-family: inherit;
+  font-size: 13px;
+  background: #fff;
+  color: var(--text);
+}
+
+.panel-edicion textarea { resize: vertical; }
+
+.fila-botones-rapidos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.fila-botones-rapidos .btn { flex: 1; padding: 9px 6px; font-size: 11px; text-align: center; }
+
+.checklist {
+  border: 1px solid var(--border);
+  max-height: 200px;
+  overflow: auto;
+  padding: 2px;
+}
+.checklist label {
+  font-weight: 400;
+  font-size: 13px;
+  margin: 0;
+  padding: 5px 6px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.checklist label:hover { background: #F5F5F5; }
+
+.panel-vacio {
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 30px 0;
+  text-align: center;
+}
+
+/* --- Genérico --- */
+.oculto { display: none !important; }
+
+@media (max-width: 900px) {
+  .cuerpo { flex-direction: column; }
+  .panel-edicion { max-width: none; width: 100%; position: static; }
+  .contenedor-tabla { max-height: none; }
+}
